@@ -1,0 +1,8 @@
+{
+  "name": "excellence-academy",
+  "version": "1.0.0",
+  "description": "Excellence Academy website with enquiry backend",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=16" }
+}
