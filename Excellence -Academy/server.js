@@ -3,12 +3,15 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 
 const PORT = process.env.PORT || 3000;
 const PUBLIC_DIR = path.join(__dirname, "public");
 const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, "data");
 const DATA_FILE = path.join(DATA_DIR, "enquiries.json");
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "change-me";
+if (ADMIN_TOKEN === "change-me")
+  console.warn("WARNING: ADMIN_TOKEN is the default. Set a long random ADMIN_TOKEN before going live.");
 
 fs.mkdirSync(DATA_DIR, { recursive: true });
 if (!fs.existsSync(DATA_FILE)) fs.writeFileSync(DATA_FILE, "[]");
@@ -26,6 +29,7 @@ const INJECT = `<script>
   if (!form) return;
   var clone = form.cloneNode(true);           // drops the demo mailto handler
   form.parentNode.replaceChild(clone, form);
+  clone.classList.add("visible");             // the copy is not watched by the scroll-reveal, so show it now
   clone.addEventListener("submit", function (e) {
     e.preventDefault();
     if (!clone.reportValidity()) return;
@@ -70,7 +74,7 @@ const server = http.createServer((req, res) => {
   const url = new URL(req.url, "http://localhost");
 
   if (req.method === "POST" && url.pathname === "/api/enquiry") {
-    const ip = req.socket.remoteAddress;
+    const ip = (req.headers["x-forwarded-for"] || req.socket.remoteAddress || "").split(",")[0].trim();
     if (limited(ip)) return send(res, 429, { error: "Too many enquiries. Please try later." });
     let body = "";
     req.on("data", c => { body += c; if (body.length > 20000) req.destroy(); });
@@ -99,7 +103,8 @@ const server = http.createServer((req, res) => {
 
   if (req.method === "GET" && url.pathname === "/api/enquiries") {
     const token = (req.headers.authorization || "").replace("Bearer ", "");
-    if (token !== ADMIN_TOKEN) return send(res, 401, { error: "Unauthorized" });
+    const a = Buffer.from(token), b = Buffer.from(ADMIN_TOKEN);
+    if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) return send(res, 401, { error: "Unauthorized" });
     return send(res, 200, readEnquiries());
   }
 
@@ -108,10 +113,12 @@ const server = http.createServer((req, res) => {
   if (req.method !== "GET") return send(res, 405, { error: "Method not allowed" });
 
   // Static files
-  let rel = decodeURIComponent(url.pathname);
+  let rel;
+  try { rel = decodeURIComponent(url.pathname); }
+  catch { res.writeHead(400, { "Content-Type": "text/plain" }); return res.end("Bad request"); }
   if (rel === "/") rel = "/index.html";
   const file = path.normalize(path.join(PUBLIC_DIR, rel));
-  if (!file.startsWith(PUBLIC_DIR)) { res.writeHead(403); return res.end("Forbidden"); }
+  if (!file.startsWith(PUBLIC_DIR + path.sep)) { res.writeHead(403); return res.end("Forbidden"); }
   fs.readFile(file, (err, buf) => {
     if (err) { res.writeHead(404, { "Content-Type": "text/plain" }); return res.end("Not found"); }
     const ext = path.extname(file).toLowerCase();
