@@ -27,6 +27,7 @@
       --ink: #202a40;
       --muted: #68748b;
       --light: #f6f8fc;
+      --soft-blue: #edf0ff;
       --white: #ffffff;
       --border: #e6eaf2;
       --radius: 20px;
@@ -447,7 +448,7 @@
       display: grid;
       place-items: center;
       color: var(--blue);
-      background: #edf0ff;
+      background: var(--soft-blue);
       border-radius: 10px;
     }
 
@@ -497,8 +498,9 @@
       height: 44px;
       display: grid;
       place-items: center;
+      flex-shrink: 0;
       color: var(--blue);
-      background: #edf0ff;
+      background: var(--soft-blue);
       border-radius: 12px;
     }
 
@@ -620,7 +622,7 @@
       display: grid;
       place-items: center;
       color: var(--blue);
-      background: #edf0ff;
+      background: var(--soft-blue);
       border-radius: 15px;
       margin-bottom: 23px;
     }
@@ -656,14 +658,11 @@
       color: var(--blue);
       font-weight: 700;
       font-size: .88rem;
+      transition: gap .2s;
     }
 
     .text-link:hover {
       gap: 13px;
-    }
-
-    .text-link span {
-      transition: transform .2s;
     }
 
     /* Why us */
@@ -822,7 +821,7 @@
       place-items: center;
       flex-shrink: 0;
       color: var(--blue);
-      background: #edf0ff;
+      background: var(--soft-blue);
       border-radius: 50%;
       font-weight: 800;
     }
@@ -910,7 +909,7 @@
     /* Contact */
 
     .contact-section {
-      background: #f1f4fb;
+      background: var(--white);
     }
 
     .contact-grid {
@@ -952,10 +951,15 @@
       overflow-wrap: anywhere;
     }
 
+    .contact-detail a:hover {
+      color: var(--blue);
+    }
+
     .contact-form {
       padding: 34px;
+      border: 1px solid var(--border);
       border-radius: 23px;
-      background: white;
+      background: var(--light);
       box-shadow: var(--shadow);
     }
 
@@ -995,9 +999,9 @@
     .form-group select {
       width: 100%;
       padding: 13px 14px;
-      border: 1px solid #dce2ed;
+      border: 1px solid var(--border);
       border-radius: 9px;
-      background: #fbfcff;
+      background: var(--white);
       color: var(--ink);
       outline: none;
       transition: border-color .2s, box-shadow .2s;
@@ -1007,7 +1011,7 @@
     .form-group textarea:focus,
     .form-group select:focus {
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(67,97,238,.1);
+      box-shadow: 0 0 0 3px rgba(67,97,238,.12);
     }
 
     .form-group textarea {
@@ -1250,7 +1254,7 @@
         align-items: stretch;
         gap: 0;
         padding: 12px 20px 22px;
-        background: white;
+        background: var(--white);
         border-bottom: 1px solid var(--border);
         box-shadow: 0 18px 28px rgba(16,27,56,.08);
       }
@@ -1455,7 +1459,7 @@
               </svg>
             </div>
             <div>
-              <strong>Learn & Grow</strong>
+              <strong>Learn &amp; Grow</strong>
               <small>One step at a time</small>
             </div>
           </div>
@@ -1600,7 +1604,7 @@
                 <circle cx="12" cy="12" r="9"/>
               </svg>
             </div>
-            <h3>Mathematics & Science</h3>
+            <h3>Mathematics &amp; Science</h3>
             <p>Explore concepts, work through problems and develop a logical approach to challenging topics.</p>
             <a class="text-link" href="#contact" data-course="Mathematics and Science">Enquire about classes <span>→</span></a>
           </article>
@@ -1635,7 +1639,7 @@
                 <path d="M7 16V12M12 16V8M17 16V4" stroke-width="3"/>
               </svg>
             </div>
-            <h3>Revision & Doubt Solving</h3>
+            <h3>Revision &amp; Doubt Solving</h3>
             <p>Revisit difficult topics, clarify questions and reinforce learning through guided practice.</p>
             <a class="text-link" href="#contact" data-course="Revision and Doubt Solving">Enquire about classes <span>→</span></a>
           </article>
@@ -1645,7 +1649,6 @@
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="12" cy="8" r="4"/>
                 <path d="M5 21V19A7 7 0 0119 19V21"/>
-                <path d="M19 4L21 6L23 4" transform="translate(-1 0)"/>
               </svg>
             </div>
             <h3>Personalised Learning Support</h3>
@@ -1784,7 +1787,7 @@
     <section class="section" id="testimonials">
       <div class="container">
         <div class="section-heading center reveal">
-          <span class="eyebrow">Parent & Student Voices</span>
+          <span class="eyebrow">Parent &amp; Student Voices</span>
           <h2>Every learning journey matters.</h2>
           <p>Hear what families value in a supportive educational experience.</p>
         </div>
@@ -1868,8 +1871,8 @@
             <summary>How can I enquire about admission?</summary>
             <div class="faq-answer">
               Complete the enquiry form on this page with your contact details,
-              the student's class and the course of interest. Our actual contact
-              details must be configured before the form can send enquiries.
+              the student's class and the course of interest. You can also call
+              or email us using the details in the contact section.
             </div>
           </details>
 
@@ -1942,7 +1945,6 @@
             <h3 style="font-family:Manrope,sans-serif;font-size:1.45rem;margin-bottom:14px;">Connect with Excellence Academy</h3>
             <p>Whether you're a parent exploring classes or a student looking for guidance, start with an enquiry.</p>
 
-            <!-- Replace the placeholders below with real contact details. -->
             <div class="contact-detail">
               <div class="service-icon">
                 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -1951,7 +1953,7 @@
               </div>
               <div>
                 <strong>Phone</strong>
-                <p>Replace with your academy phone number</p>
+                <a href="tel:+918591929892">+91 8591929892</a>
               </div>
             </div>
 
@@ -1964,7 +1966,8 @@
               </div>
               <div>
                 <strong>Email</strong>
-                <p>Replace with your academy email address</p>
+                <!-- Replace with the academy's real email address (also in the footer and ACADEMY_EMAIL in the script). -->
+                <a href="mailto:info@excellenceacademy.example">info@excellenceacademy.example</a>
               </div>
             </div>
 
@@ -1977,7 +1980,7 @@
               </div>
               <div>
                 <strong>Academy Address</strong>
-                <p>Replace with your academy's complete address</p>
+                <p>Jokim Compound, Bhandup West</p>
               </div>
             </div>
 
@@ -2036,12 +2039,12 @@
             </div>
 
             <button class="btn btn-primary" type="submit">
-              Prepare Enquiry <span aria-hidden="true">↗</span>
+              Send Enquiry <span aria-hidden="true">↗</span>
             </button>
 
             <p class="form-note">
-              This demonstration form prepares an enquiry message in your email
-              application. It does not store or transmit form submissions to a server.
+              Submitting this form opens your email app with the enquiry
+              pre-filled. Please review and send it from there.
             </p>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
           </form>
@@ -2122,7 +2125,7 @@
           <h3>Our Courses</h3>
           <ul class="footer-links">
             <li><a href="#services">Academic Coaching</a></li>
-            <li><a href="#services">Mathematics & Science</a></li>
+            <li><a href="#services">Mathematics &amp; Science</a></li>
             <li><a href="#services">Board Preparation</a></li>
             <li><a href="#services">Entrance Guidance</a></li>
             <li><a href="#services">Revision Support</a></li>
@@ -2133,9 +2136,9 @@
         <div>
           <h3>Contact Information</h3>
           <ul class="footer-links">
-            <li><a href="#contact">Phone: add your number</a></li>
-            <li><a href="#contact">Email: add your email</a></li>
-            <li><a href="#contact">Address: add your location</a></li>
+            <li><a href="tel:+918591929892">Phone: +91 8591929892</a></li>
+            <li><a href="mailto:info@excellenceacademy.example">Email: info@excellenceacademy.example</a></li>
+            <li><a href="#contact">Address: Jokim Compound, Bhandup West</a></li>
             <li><a href="#contact">Admission Enquiries</a></li>
           </ul>
         </div>
@@ -2235,14 +2238,12 @@
       });
     });
 
-    // Contact form demonstration
-    // Configure a real email address or a server endpoint before launch.
+    // Contact form: opens the visitor's email app with the enquiry pre-filled
     const contactForm = document.getElementById("contactForm");
     const formStatus = document.getElementById("formStatus");
 
-    // IMPORTANT: Replace this with the academy's real, verified email address.
-    // Leave blank until configured. No data is sent to a server by this demo.
-    const ACADEMY_EMAIL = "";
+    // IMPORTANT: Replace with the academy's real, verified email address.
+    const ACADEMY_EMAIL = "info@excellenceacademy.example";
 
     contactForm.addEventListener("submit", event => {
       event.preventDefault();
@@ -2275,12 +2276,6 @@
         "Message:",
         message
       ].join("\n");
-
-      if (!ACADEMY_EMAIL.trim()) {
-        formStatus.textContent =
-          "The form is ready, but the academy email address has not been configured. Add your real email in the JavaScript before using this form.";
-        return;
-      }
 
       const mailto = "mailto:" + ACADEMY_EMAIL +
         "?subject=" + encodeURIComponent(subject) +
